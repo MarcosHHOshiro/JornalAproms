@@ -32,7 +32,7 @@ const events: TimelineEvent[] = [
     title: "Parceria com Pierre Curie",
     shortText: "Conheceu Pierre Curie e iniciou uma importante parceria cientifica.",
     expandedText: "O casamento com Pierre tambem deu inicio a uma colaboracao que transformaria a historia da ciencia.",
-    image: "/images/marie-1895-pierre.jpg"
+    image: "/images/Marie-e-Pierre.jpg"
   },
   {
     year: "1898",
