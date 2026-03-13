@@ -32,7 +32,7 @@ const events: TimelineEvent[] = [
     title: "Parceria com Pierre Curie",
     shortText: "Conheceu Pierre Curie e iniciou uma importante parceria cientifica.",
     expandedText: "O casamento com Pierre tambem deu inicio a uma colaboracao que transformaria a historia da ciencia.",
-    image: "/images/Marie-e-Pierre.jpg"
+    image: "/images/marie-1895-pierre.jpg"
   },
   {
     year: "1898",
@@ -105,7 +105,7 @@ function TimelineCard({ event, index }: { event: TimelineEvent; index: number })
       )}
     >
       <div className="flex w-20 shrink-0 flex-col items-end md:w-28">
-        <span className="border border-timeline-border bg-timeline-card px-2 py-1 font-display text-sm tracking-[0.14em] text-timeline-accent md:text-base">
+        <span className="border-2 border-double border-timeline-border bg-timeline-card px-2 py-1 font-display text-sm tracking-[0.14em] text-timeline-accent md:text-base">
           {event.year}
         </span>
         {index < events.length - 1 && <div className="mt-2 w-px min-h-14 flex-1 bg-timeline-border/80" />}
@@ -115,18 +115,20 @@ function TimelineCard({ event, index }: { event: TimelineEvent; index: number })
         type="button"
         aria-expanded={isExpanded}
         className={cn(
-          "group mb-8 w-full border-2 border-double text-left transition-all duration-300",
+          "newspaper-card group mb-10 w-full overflow-hidden border-[3px] border-double text-left transition-all duration-300",
           "border-timeline-border bg-timeline-card/95",
-          isExpanded ? "shadow-[0_8px_22px_rgba(45,32,20,0.22)]" : "hover:-translate-y-0.5 hover:shadow-[0_8px_22px_rgba(45,32,20,0.16)]"
+          isExpanded ? "shadow-[0_10px_24px_rgba(45,32,20,0.24)]" : "hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(45,32,20,0.17)]"
         )}
         onClick={() => setIsExpanded(!isExpanded)}
       >
-        <div className="border-b border-timeline-border/80 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-timeline-muted md:px-5">
-          Arquivo #{String(index + 1).padStart(2, "0")}
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-timeline-border/80 bg-timeline-bg/65 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-timeline-muted md:px-6">
+          <span>Caderno ciencia</span>
+          <span>Arquivo #{String(index + 1).padStart(2, "0")}</span>
+          <span>Correspondencia de Paris</span>
         </div>
 
         <div className="grid md:grid-cols-[36%_1fr]">
-          <figure className="relative h-52 overflow-hidden border-b border-timeline-border/70 md:h-full md:min-h-56 md:border-b-0 md:border-r">
+          <figure className="relative h-52 overflow-hidden border-b border-timeline-border/70 md:h-full md:min-h-60 md:border-b-0 md:border-r">
             <img
               src={event.image}
               alt={event.title}
@@ -135,33 +137,46 @@ function TimelineCard({ event, index }: { event: TimelineEvent; index: number })
                 isExpanded ? "scale-[1.03]" : "group-hover:scale-[1.015]"
               )}
             />
-            <figcaption className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/55 to-transparent px-3 pb-2 pt-8 text-[10px] uppercase tracking-[0.15em] text-zinc-100">
-              Acervo historico
+            <figcaption className="absolute bottom-0 left-0 right-0 border-t border-zinc-200/45 bg-gradient-to-t from-black/65 to-transparent px-3 pb-2 pt-8 text-[10px] uppercase tracking-[0.15em] text-zinc-100">
+              Arquivo historico da redacao
             </figcaption>
           </figure>
 
           <div className="p-4 md:p-6">
-            <div className="mb-3 flex items-start justify-between gap-4">
-              <h3 className="font-display text-2xl leading-tight text-timeline-text md:text-3xl">{event.title}</h3>
-              <ChevronDown
-                className={cn(
-                  "mt-1 h-5 w-5 shrink-0 text-timeline-accent transition-transform duration-300",
-                  isExpanded && "rotate-180"
-                )}
-              />
-            </div>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-timeline-muted">Paris, {event.year}</p>
 
-            <p className="text-[0.98rem] leading-7 text-timeline-text first-letter:mr-1 first-letter:font-display first-letter:text-4xl first-letter:leading-none first-letter:text-timeline-accent md:text-base">
+            <h3 className="mt-2 border-b border-timeline-border/70 pb-3 font-display text-2xl uppercase leading-tight text-timeline-text md:text-4xl">
+              {event.title}
+            </h3>
+
+            <p className="mt-4 border-l-2 border-timeline-border/70 pl-3 text-xs font-semibold uppercase tracking-[0.14em] text-timeline-muted md:text-[0.78rem]">
+              Resumo da materia
+            </p>
+
+            <p className="mt-3 text-[1rem] leading-7 text-timeline-text md:text-[1.06rem] md:leading-8">
               {event.shortText}
             </p>
 
             <div
               className={cn(
-                "overflow-hidden border-t border-timeline-border/80 transition-all duration-500 ease-out",
-                isExpanded ? "mt-4 max-h-56 pt-4 opacity-100" : "max-h-0 pt-0 opacity-0"
+                "overflow-hidden border-t border-dashed border-timeline-border/80 transition-all duration-500 ease-out",
+                isExpanded ? "mt-4 max-h-72 pt-4 opacity-100" : "max-h-0 pt-0 opacity-0"
               )}
             >
-              <p className="text-[0.98rem] leading-7 text-timeline-muted md:text-base">{event.expandedText}</p>
+              <p className="border-l-2 border-timeline-border/70 pl-3 text-xs font-semibold uppercase tracking-[0.14em] text-timeline-muted md:text-[0.78rem]">
+                Texto completo
+              </p>
+              <p className="mt-3 text-[0.98rem] leading-7 text-timeline-muted md:text-[1.02rem] md:leading-8">{event.expandedText}</p>
+            </div>
+
+            <div className="mt-4 flex items-center justify-between border-t border-timeline-border/70 pt-3 text-[10px] font-semibold uppercase tracking-[0.15em] text-timeline-muted">
+              <span>{isExpanded ? "Fim da materia" : "Clique para ler continuacao"}</span>
+              <ChevronDown
+                className={cn(
+                  "h-5 w-5 shrink-0 text-timeline-accent transition-transform duration-300",
+                  isExpanded && "rotate-180"
+                )}
+              />
             </div>
           </div>
         </div>
@@ -189,17 +204,17 @@ export function MarieCurieTimeline() {
   }, [])
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-timeline-bg text-timeline-text">
+    <div className="paper-surface relative min-h-screen overflow-hidden bg-timeline-bg text-timeline-text">
       <div
-        className="pointer-events-none fixed inset-0 z-0 opacity-40"
+        className="pointer-events-none fixed inset-0 z-0 opacity-35"
         style={{
           backgroundImage:
-            "radial-gradient(circle at 20% 20%, rgba(97, 68, 40, 0.12), transparent 38%), radial-gradient(circle at 80% 5%, rgba(97, 68, 40, 0.09), transparent 34%)"
+            "repeating-linear-gradient(90deg, rgba(84, 63, 45, 0.045) 0, rgba(84, 63, 45, 0.045) 1px, transparent 1px, transparent 185px)"
         }}
       />
       <div
         className="pointer-events-none fixed inset-0 z-0"
-        style={{ backgroundImage: "radial-gradient(circle at center, transparent 48%, rgba(58, 38, 22, 0.2) 100%)" }}
+        style={{ backgroundImage: "radial-gradient(circle at center, transparent 45%, rgba(58, 38, 22, 0.22) 100%)" }}
       />
 
       <div className="fixed left-0 right-0 top-0 z-50 h-[2px] bg-timeline-border/45">
@@ -220,10 +235,14 @@ export function MarieCurieTimeline() {
               className="h-10 w-auto border border-timeline-border/70 bg-timeline-card px-2 py-1 grayscale sepia contrast-[0.9] md:h-12"
             />
           </div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-timeline-muted">Edicao especial</p>
+          <div className="flex flex-wrap items-center justify-between gap-2 border-y border-timeline-border px-2 py-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-timeline-muted">
+            <span>Edicao especial</span>
+            <span>Sexta-feira, 8 de novembro de 1911</span>
+            <span>Preco: 20 centavos</span>
+          </div>
 
-          <h1 className="mt-2 font-display text-5xl uppercase leading-none tracking-wide text-timeline-text md:text-7xl">
-            Gazeta da Ciencia
+          <h1 className="mt-4 font-display text-5xl uppercase leading-none tracking-wide text-timeline-text md:text-7xl">
+            Gazeta da Aproms
           </h1>
 
           <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-y border-timeline-border py-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-timeline-muted md:text-xs">
@@ -237,7 +256,7 @@ export function MarieCurieTimeline() {
           </h2>
 
           <div className="mt-6 grid items-center gap-5 md:grid-cols-[1fr_180px]">
-            <p className="text-base leading-7 text-timeline-muted md:text-lg">
+            <p className="text-base leading-7 text-timeline-muted md:columns-2 md:gap-8 md:text-lg">
               Linha do tempo em formato de recortes historicos sobre a cientista que redefiniu a Fisica, a Quimica e a Medicina.
             </p>
 
